@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ruleset name="MiBo Standard" namespace="">
+    <description>MiBo coding standard</description>
+
+    <arg name="colors"/>
+
+    <ini name="memory_limit" value="16M"/>
+
+    <file>./src</file>
+
+    <exclude-pattern>*/resources/*</exclude-pattern>
+    <exclude-pattern>*/cache/*</exclude-pattern>
+
+    <rule ref="Squiz.Functions.MultiLineFunctionDeclaration.NewlineBeforeOpenBrace">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FileComment.Missing">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Files.FileExtension.ClassFound">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.FunctionSpacing.BeforeFirst">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.FunctionSpacing.After">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FunctionComment.InvalidReturn">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.FunctionSpacing.AfterLast">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.ClosingDeclarationComment.Missing">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.ClassComment.TagNotAllowed">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Generic.Commenting.DocComment.ContentAfterOpen">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Generic.Commenting.DocComment.ContentBeforeClose">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.MemberVarSpacing.FirstIncorrect">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.FunctionClosingBraceSpace.SpacingBeforeClose">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.VariableComment.TagNotAllowed">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.VariableComment.IncorrectVarType">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpaceBeforeEquals">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Operators.ComparisonOperatorUsage.NotAllowed">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Strings.DoubleQuoteUsage.NotRequired">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PEAR.Functions.FunctionCallSignature.CloseBracketLine">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.PHP.DisallowBooleanStatement.Found">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FunctionCommentThrowTag.WrongNumber">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.InlineComment.DocBlock">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Strings.ConcatenationSpacing.PaddingFound">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PEAR.Formatting.MultiLineAssignment.EqualSignLine">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.LongConditionClosingComment.Missing">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.BlockComment.WrongStart">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.PHP.DisallowInlineIf.Found">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.ControlStructures.InlineIfDeclaration.NoBrackets">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.ControlStructures.InlineIfDeclaration.NotSingleLine">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.PHP.DisallowComparisonAssignment.AssignedComparison">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.NamingConventions.ValidFunctionName.MethodDoubleUnderscore">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.ObjectOperatorSpacing.Before">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.OperatorSpacing.SpacingAfter">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Objects.ObjectInstantiation.NotAssigned">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Formatting.OperatorBracket.MissingBrackets">
+        <severity>0</severity>
+    </rule>
+
+
+    <rule ref="Squiz"/>
+</ruleset>
