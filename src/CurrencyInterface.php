@@ -3,6 +3,7 @@
 namespace MiBo\Currencies;
 
 use MiBo\Currencies\ISO\ISOCurrency;
+use Stringable;
 
 /**
  * Interface CurrencyInterface
@@ -16,7 +17,7 @@ use MiBo\Currencies\ISO\ISOCurrency;
  *
  * @author Michal Boris <michal.boris27@gmail.com>
  */
-interface CurrencyInterface extends \Stringable
+interface CurrencyInterface extends Stringable
 {
     /**
      * @return non-empty-string Name of the currency.

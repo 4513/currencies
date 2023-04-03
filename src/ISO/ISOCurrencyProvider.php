@@ -146,7 +146,7 @@ class ISOCurrencyProvider extends CurrencyProvider
         $match = reset($match);
 
         if ($match === false) {
-            throw new InvalidCurrencyException("The ISO currency could not be found!");
+            throw new InvalidCurrencyException("The ISO currency could not be found!"); // @codeCoverageIgnore
         }
 
         return $match;

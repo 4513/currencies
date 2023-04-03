@@ -4,6 +4,7 @@ namespace MiBo\Currencies\ISO;
 
 use MiBo\Currencies\CurrencyInterface;
 use MiBo\Currencies\ISO\Exceptions\InvalidCurrencyException;
+use ReturnTypeWillChange;
 
 /**
  * Class Currency
@@ -83,6 +84,7 @@ final class ISOCurrency implements CurrencyInterface
      *
      * @throws InvalidCurrencyException On invalid data.
      */
+    #[ReturnTypeWillChange]
     public static function validateISO(CurrencyInterface $currency): void
     {
         if (!$currency instanceof ISOCurrency) {

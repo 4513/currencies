@@ -2,8 +2,10 @@
 
 namespace MiBo\Currencies\Tests;
 
+use Generator;
 use MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException;
 use MiBo\Currencies\ISO\ISOListLoader;
+use MiBo\Currencies\ListLoader;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,11 +21,17 @@ class ListLoaderTest extends TestCase
 {
     private static ISOListLoader $loader;
 
+    /**
+     * @inheritDoc
+     */
     public static function setUpBeforeClass(): void
     {
         self::$loader = new ISOListLoader(ISOListLoader::SOURCE_LOCAL);
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function setUp(): void
     {
         $this->getLoader()->setResources(ISOListLoader::SOURCE_LOCAL);
@@ -144,6 +152,49 @@ class ListLoaderTest extends TestCase
         $this->assertIsArray($this->getLoader()->getResources());
 
         $this->assertSame(1, count($this->getLoader()->getResources()));
+    }
+
+    /**
+     * @small
+     *
+     * @covers \MiBo\Currencies\ISO\ISOListLoader::__construct
+     *
+     * @return void
+     */
+    public function testConstruct(): void
+    {
+        self::$loader = new ISOListLoader(ISOListLoader::SOURCE_LOCAL);
+
+        $this->assertSame([ISOListLoader::SOURCE_LOCAL], $this->getLoader()->getResources());
+    }
+
+    /**
+     * @small
+     *
+     * @covers ::getResources
+     * @covers ::setResources
+     * @covers ::addResource
+     *
+     * @return void
+     */
+    public function testResources(): void
+    {
+        $loader = new class extends ListLoader {
+            public function loop(): array
+            {
+                return [];
+            }
+        };
+
+        $this->assertEmpty($loader->getResources());
+
+        $loader->setResources("myResource", "anotherResource");
+
+        $this->assertSame(["myResource", "anotherResource"], $loader->getResources());
+
+        $loader->addResource("newResource");
+
+        $this->assertSame(["myResource", "anotherResource", "newResource"], $loader->getResources());
     }
 
 

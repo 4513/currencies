@@ -25,6 +25,10 @@ class CachedFileTest extends TestCase
      */
     public static function setUpBeforeClass(): void
     {
+        if (!is_dir(self::DIR_TMP)) {
+            mkdir(static::DIR_TMP, 0770, true);
+        }
+
         self::$loader = new ISOLocalListLoader(static::DIR_TMP);
     }
 
