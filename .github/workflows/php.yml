@@ -2,9 +2,12 @@ name: PHP Composer
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - "**"
   pull_request:
     branches: [ "main" ]
+  schedule:
+    - cron: "0 1 * * *"
 
 permissions:
   contents: read
