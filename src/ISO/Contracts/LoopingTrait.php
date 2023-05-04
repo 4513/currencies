@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MiBo\Currencies\ISO\Contracts;
 
+use DOMDocument;
 use Generator;
 use MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException;
+use XMLReader;
 
 /**
  * Trait LoopingTrait
@@ -12,7 +16,9 @@ use MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException;
  *
  * @since 0.3
  *
- * @author Michal Boris <michal.boris@gmail.com>
+ * @author Michal Boris <michal.boris27@gmail.com>
+ *
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise.
  */
 trait LoopingTrait
 {
@@ -25,15 +31,15 @@ trait LoopingTrait
      */
     public function loop(string $resource, string $entityTag): Generator
     {
-        $xmlReader = \XMLReader::open($resource);
+        $xmlReader = XMLReader::open($resource);
 
-        if (!$xmlReader instanceof \XMLReader) {
+        if (!$xmlReader instanceof XMLReader) {
             throw new UnavailableCurrencyListException(
                 strtr("Failed to open currency list '%list%'", ["%list%" => $resource])
             );
         }
 
-        $domDoc = new \DOMDocument();
+        $domDoc = new DOMDocument();
 
         // @phpcs:disable
         while ($xmlReader->read() && $xmlReader->name !== $entityTag) {

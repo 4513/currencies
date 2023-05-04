@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MiBo\Currencies;
 
 use Generator;
-use MiBo\Currencies\ISO\ISOListLoader;
-use SimpleXMLElement;
 
 /**
  * Class ListLoader
@@ -13,9 +13,11 @@ use SimpleXMLElement;
  *
  * @package MiBo\Currencies
  *
- * @see ISOListLoader
+ * @see \MiBo\Currencies\ISO\ISOListLoader
  *
  * @author Michal Boris <michal.boris27@gmail.com>
+ *
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise.
  */
 abstract class ListLoader
 {
@@ -28,7 +30,7 @@ abstract class ListLoader
      * can be created.
      *  Element MUST be an object with public properties.
      *
-     * @return array<object|SimpleXMLElement>|Generator<object|SimpleXMLElement>
+     * @return array<object|\SimpleXMLElement>|\Generator<object|\SimpleXMLElement>
      */
     abstract public function loop(): array|Generator;
 

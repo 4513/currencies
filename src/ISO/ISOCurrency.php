@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MiBo\Currencies\ISO;
 
 use MiBo\Currencies\CurrencyInterface;
@@ -18,6 +20,8 @@ use ReturnTypeWillChange;
  * @internal ISOCurrency MUST be created only via ISOCurrencyProvider
  *
  * @author Michal Boris <michal.boris27@gmail.com>
+ *
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise.
  */
 final class ISOCurrency implements CurrencyInterface
 {
@@ -57,7 +61,7 @@ final class ISOCurrency implements CurrencyInterface
      *
      * @internal ISOCurrency MUST be created only via ISOCurrencyProvider
      *
-     * @throws InvalidCurrencyException
+     * @throws \MiBo\Currencies\ISO\Exceptions\InvalidCurrencyException
      * @see validateISO
      */
     public function __construct(
@@ -78,11 +82,11 @@ final class ISOCurrency implements CurrencyInterface
     /**
      * Validates whether the currency is properly set.
      *
-     * @param CurrencyInterface $currency Currency to be validated.
+     * @param \MiBo\Currencies\CurrencyInterface $currency Currency to be validated.
      *
      * @return void
      *
-     * @throws InvalidCurrencyException On invalid data.
+     * @throws \MiBo\Currencies\ISO\Exceptions\InvalidCurrencyException On invalid data.
      */
     #[ReturnTypeWillChange]
     public static function validateISO(CurrencyInterface $currency): void

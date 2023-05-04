@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MiBo\Currencies\ISO;
 
 use Generator;
@@ -13,12 +15,14 @@ use SimpleXMLElement;
  *
  * Provides source of list of ISO-4217 currencies.
  *
- * @package MiBo\Currencies
+ * @package MiBo\Currencies\ISO
  *
  * @link https://www.iso.org/iso-4217-currency-codes.html
  * @link https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml
  *
  * @author Michal Boris <michal.boris27@gmail.com>
+ *
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise.
  */
 final class ISOListLoader extends ListLoader
 {
@@ -93,7 +97,7 @@ final class ISOListLoader extends ListLoader
     /**
      * @param self::SOURCE_* $source
      *
-     * @throws UnavailableCurrencyListException If the source is not valid.
+     * @throws \MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException If the source is not valid.
      */
     public function __construct(string $source = self::SOURCE_LOCAL)
     {
@@ -101,10 +105,10 @@ final class ISOListLoader extends ListLoader
     }
 
     /**
-     * @return Generator<SimpleXMLElement> object which properties are set same way as in
+     * @return \Generator<\SimpleXMLElement> object which properties are set same way as in
      *      the resource file.
      *
-     * @throws UnavailableCurrencyListException If failed to read resources.
+     * @throws \MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException If failed to read resources.
      */
     public function loop(): Generator
     {
@@ -121,7 +125,7 @@ final class ISOListLoader extends ListLoader
      *
      * @return static
      *
-     * @throws UnavailableCurrencyListException
+     * @throws \MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException
      */
     public function addResource(string $resource): static
     {
@@ -141,7 +145,7 @@ final class ISOListLoader extends ListLoader
      *
      * @return static
      *
-     * @throws UnavailableCurrencyListException
+     * @throws \MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException
      */
     public function setResources(string ...$resources): static
     {
