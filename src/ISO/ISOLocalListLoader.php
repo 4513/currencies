@@ -30,6 +30,7 @@ class ISOLocalListLoader extends ListLoader
     public const FILE_NAME = "ISO_4217.xml";
 
     protected string $cacheDir;
+
     protected ?ISOListLoader $loader = null;
 
     /**
@@ -58,15 +59,13 @@ class ISOLocalListLoader extends ListLoader
         $handle = curl_init(ISOListLoader::SOURCE_WEB);
 
         if ($handle === false) {
-            return false;
-            // @codeCoverageIgnore
+            return false; // @codeCoverageIgnore
         }
 
         $local = fopen($this->getCacheDir() . DIRECTORY_SEPARATOR . self::FILE_NAME, "wb");
 
         if ($local === false) {
-            return false;
-            // @codeCoverageIgnore
+            return false; // @codeCoverageIgnore
         }
 
         curl_setopt($handle, CURLOPT_FILE, $local);

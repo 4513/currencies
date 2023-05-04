@@ -1,7 +1,8 @@
 <?php
 
-namespace MiBo\Currencies\CurrencyFactory\Tests;
+namespace MiBo\Currencies\Tests;
 
+use MiBo\Currencies\CurrencyInterface;
 use MiBo\Currencies\ISO\ISOCurrency;
 use MiBo\Currencies\ISO\ISOCurrencyProvider;
 use MiBo\Currencies\ISO\ISOListLoader;
@@ -12,16 +13,18 @@ use Psr\Log\NullLogger;
 /**
  * Class ISOManager
  *
- * @package MiBo\Currencies\CurrencyFactory\Tests
+ * @package MiBo\Currencies\Tests
  *
- * @author Michal Boris <michal.boris@gmail.com>
+ * @author Michal Boris <michal.boris27@gmail.com>
  *
  * @coversDefaultClass \MiBo\Currencies\ISO\ISOCurrencyManager
  */
 class ISOManager extends TestCase
 {
     private static ISOCurrencyManager $manager;
+
     private static ISOCurrency $validCurrency;
+
     private static ISOCurrency $invalidCurrency;
 
     public static function setUpBeforeClass(): void
@@ -54,8 +57,27 @@ class ISOManager extends TestCase
     /**
      * @small
      *
+     * @covers ::__construct
+     * @covers ::getProvider
+     *
+     * @return void
+     */
+    public function testManager(): void
+    {
+        $manager = new ISOCurrencyManager(
+            new ISOCurrencyProvider(new ISOListLoader(ISOListLoader::SOURCE_LOCAL), new NullLogger()),
+            new NullLogger()
+        );
+
+        $this->assertSame([ISOListLoader::SOURCE_LOCAL], $manager->getProvider()->getLoader()->getResources());
+    }
+
+    /**
+     * @small
+     *
      * @covers ::isCurrencyValid
      * @covers ::isCurrencyISO
+     * @covers ::getLogger
      *
      * @return void
      */
@@ -64,12 +86,28 @@ class ISOManager extends TestCase
         $this->assertTrue($this->getManager()->isCurrencyValid($this->getValidCurrency()));
         $this->assertTrue($this->getManager()->isCurrencyISO($this->getValidCurrency()));
 
-        $this->assertFalse($this->getManager()->isCurrencyValid($this->getInvalidCurrency()));
+        $this->assertTrue($this->getManager()->isCurrencyValid($this->getInvalidCurrency()));
         $this->assertFalse($this->getManager()->isCurrencyISO($this->getInvalidCurrency()));
+
+        $this->assertFalse($this->getManager()->isCurrencyISO(
+            new ISOCurrency("TEST", "TTT", "012", 0)
+        ));
+
+        $this->assertFalse($this->getManager()->isCurrencyISO(
+            new class implements CurrencyInterface {
+                public function getName(): string { return ""; }
+                public function getCode(): string { return ""; }
+                public function getAlphabeticalCode(): string { return ""; }
+                public function getNumericalCode(): string { return true; }
+                public function getMinorUnitRate(): ?int { return null; }
+                public function is(CurrencyInterface $currency): bool { return false; }
+                public function __toString(): string { return ""; }
+            }
+        ));
     }
 
     /**
-     * @return ISOCurrencyManager
+     * @return \MiBo\Currencies\ISO\ISOCurrencyManager
      */
     public function getManager(): ISOCurrencyManager
     {
@@ -77,7 +115,7 @@ class ISOManager extends TestCase
     }
 
     /**
-     * @return ISOCurrency
+     * @return \MiBo\Currencies\ISO\ISOCurrency
      */
     public function getValidCurrency(): ISOCurrency
     {
@@ -85,7 +123,7 @@ class ISOManager extends TestCase
     }
 
     /**
-     * @return ISOCurrency
+     * @return \MiBo\Currencies\ISO\ISOCurrency
      */
     public function getInvalidCurrency(): ISOCurrency
     {

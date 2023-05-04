@@ -4,12 +4,9 @@
 
     <arg name="colors"/>
 
-    <ini name="memory_limit" value="16M"/>
+    <arg value="sp" />
 
     <file>./src</file>
-
-    <exclude-pattern>*/resources/*</exclude-pattern>
-    <exclude-pattern>*/cache/*</exclude-pattern>
 
     <rule ref="Squiz.Functions.MultiLineFunctionDeclaration.NewlineBeforeOpenBrace">
         <severity>0</severity>
@@ -20,16 +17,14 @@
     <rule ref="Squiz.Files.FileExtension.ClassFound">
         <severity>0</severity>
     </rule>
-    <rule ref="Squiz.WhiteSpace.FunctionSpacing.BeforeFirst">
-        <severity>0</severity>
-    </rule>
-    <rule ref="Squiz.WhiteSpace.FunctionSpacing.After">
-        <severity>0</severity>
+    <rule ref="Squiz.WhiteSpace.FunctionSpacing">
+        <properties>
+            <property name="spacing" value="1" />
+            <property name="spacingBeforeFirst" value="0" />
+            <property name="spacingAfterLast" value="0" />
+        </properties>
     </rule>
     <rule ref="Squiz.Commenting.FunctionComment.InvalidReturn">
-        <severity>0</severity>
-    </rule>
-    <rule ref="Squiz.WhiteSpace.FunctionSpacing.AfterLast">
         <severity>0</severity>
     </rule>
     <rule ref="Squiz.Commenting.ClosingDeclarationComment.Missing">
@@ -44,8 +39,10 @@
     <rule ref="Generic.Commenting.DocComment.ContentBeforeClose">
         <severity>0</severity>
     </rule>
-    <rule ref="Squiz.WhiteSpace.MemberVarSpacing.FirstIncorrect">
-        <severity>0</severity>
+    <rule ref="Squiz.WhiteSpace.MemberVarSpacing">
+        <properties>
+            <property name="spacingBeforeFirst" value="0" />
+        </properties>
     </rule>
     <rule ref="Squiz.WhiteSpace.FunctionClosingBraceSpace.SpacingBeforeClose">
         <severity>0</severity>
@@ -56,8 +53,10 @@
     <rule ref="Squiz.Commenting.VariableComment.IncorrectVarType">
         <severity>0</severity>
     </rule>
-    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpaceBeforeEquals">
-        <severity>0</severity>
+    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+        <properties>
+            <property name="equalsSpacing" value="1" />
+        </properties>
     </rule>
     <rule ref="Squiz.Operators.ComparisonOperatorUsage.NotAllowed">
         <severity>0</severity>
@@ -80,8 +79,11 @@
     <rule ref="Squiz.Commenting.InlineComment.DocBlock">
         <severity>0</severity>
     </rule>
-    <rule ref="Squiz.Strings.ConcatenationSpacing.PaddingFound">
-        <severity>0</severity>
+    <rule ref="Squiz.Strings.ConcatenationSpacing">
+        <properties>
+            <property name="spacing" value="1" />
+            <property name="ignoreNewlines" value="true" />
+        </properties>
     </rule>
     <rule ref="PEAR.Formatting.MultiLineAssignment.EqualSignLine">
         <severity>0</severity>
@@ -107,11 +109,15 @@
     <rule ref="Squiz.NamingConventions.ValidFunctionName.MethodDoubleUnderscore">
         <severity>0</severity>
     </rule>
-    <rule ref="Squiz.WhiteSpace.ObjectOperatorSpacing.Before">
-        <severity>0</severity>
+    <rule ref="Squiz.WhiteSpace.ObjectOperatorSpacing">
+        <properties>
+            <property name="ignoreNewlines" value="true" />
+        </properties>
     </rule>
-    <rule ref="Squiz.WhiteSpace.OperatorSpacing.SpacingAfter">
-        <severity>0</severity>
+    <rule ref="Squiz.WhiteSpace.OperatorSpacing">
+        <properties>
+            <property name="ignoreNewlines" value="true" />
+        </properties>
     </rule>
     <rule ref="Squiz.Objects.ObjectInstantiation.NotAssigned">
         <severity>0</severity>
@@ -119,7 +125,9 @@
     <rule ref="Squiz.Formatting.OperatorBracket.MissingBrackets">
         <severity>0</severity>
     </rule>
+    <rule ref="Squiz.Commenting.PostStatementComment.Found">
+        <severity>0</severity>
+    </rule>
 
-
-    <rule ref="Squiz"/>
+    <rule ref="Squiz" />
 </ruleset>

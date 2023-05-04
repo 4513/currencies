@@ -16,7 +16,7 @@ use Psr\Log\NullLogger;
  *
  * @package MiBo\Currencies\Tests
  *
- * @author Michal Boris <michal.boris@gmail.com>
+ * @author Michal Boris <michal.boris27@gmail.com>
  *
  * @coversDefaultClass \MiBo\Currencies\CurrencyProvider
  */

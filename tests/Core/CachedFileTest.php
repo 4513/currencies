@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @package MiBo\Currencies\Tests
  *
- * @author Michal Boris <michal.boris@gmail.com>
+ * @author Michal Boris <michal.boris27@gmail.com>
  *
  * @coversDefaultClass \MiBo\Currencies\ISO\ISOLocalListLoader
  */
@@ -99,6 +99,7 @@ class CachedFileTest extends TestCase
      * @small
      *
      * @covers ::loop
+     * @covers ::contractLoop
      *
      * @return void
      * @throws \MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException

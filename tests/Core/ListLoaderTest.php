@@ -2,8 +2,6 @@
 
 namespace MiBo\Currencies\Tests;
 
-use Generator;
-use MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException;
 use MiBo\Currencies\ISO\ISOListLoader;
 use MiBo\Currencies\ListLoader;
 use PHPUnit\Framework\TestCase;
@@ -13,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @package MiBo\Currencies\Tests
  *
- * @author Michal Boris <michal.boris@gmail.com>
+ * @author Michal Boris <michal.boris27@gmail.com>
  *
  * @coversDefaultClass \MiBo\Currencies\ListLoader
  */
@@ -44,7 +42,7 @@ class ListLoaderTest extends TestCase
      * @covers \MiBo\Currencies\ISO\ISOListLoader::setResources
      *
      * @return void
-     * @throws UnavailableCurrencyListException
+     * @throws \MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException
      */
     public function testChangeResourceToLocal(): void
     {
@@ -66,7 +64,7 @@ class ListLoaderTest extends TestCase
      * @covers \MiBo\Currencies\ISO\ISOListLoader::setResources
      *
      * @return void
-     * @throws UnavailableCurrencyListException
+     * @throws \MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException
      */
     public function testChangeResourceToOnline(): void
     {
@@ -88,7 +86,7 @@ class ListLoaderTest extends TestCase
      * @covers \MiBo\Currencies\ISO\ISOListLoader::addResource
      *
      * @return void
-     * @throws UnavailableCurrencyListException
+     * @throws \MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException
      */
     public function testChangeResourceToInvalid(): void
     {
@@ -118,9 +116,10 @@ class ListLoaderTest extends TestCase
      *
      * @covers ::loop
      * @covers \MiBo\Currencies\ISO\ISOListLoader::loop
+     * @covers \MiBo\Currencies\ISO\ISOListLoader::contractLoop
      *
      * @return void
-     * @throws UnavailableCurrencyListException
+     * @throws \MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException
      */
     public function testLoop(): void
     {
@@ -199,7 +198,7 @@ class ListLoaderTest extends TestCase
 
 
     /**
-     * @return ISOListLoader
+     * @return \MiBo\Currencies\ISO\ISOListLoader
      */
     public function getLoader(): ISOListLoader
     {

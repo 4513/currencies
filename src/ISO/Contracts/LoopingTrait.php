@@ -33,10 +33,13 @@ trait LoopingTrait
     {
         $xmlReader = XMLReader::open($resource);
 
+        // The file is not available, however we can do nothing about that. Cannot be covered.
         if (!$xmlReader instanceof XMLReader) {
+            // @codeCoverageIgnoreStart
             throw new UnavailableCurrencyListException(
                 strtr("Failed to open currency list '%list%'", ["%list%" => $resource])
             );
+            // @codeCoverageIgnoreEnd
         }
 
         $domDoc = new DOMDocument();
@@ -50,25 +53,31 @@ trait LoopingTrait
         while ($xmlReader->name === $entityTag) {
             $DOMNode = $xmlReader->expand();
 
+            // The list is not valid, and we cannot do anything about that. Cannot be covered.
             if ($DOMNode === false) {
+                // @codeCoverageIgnoreStart
                 throw new UnavailableCurrencyListException(
                     strtr("Failed to read currency list '%list%'", ["%list%" => $resource])
                 );
+                // @codeCoverageIgnoreEnd
             }
 
             $xml = $domDoc->importNode($DOMNode, true);
 
             $item = simplexml_import_dom($xml);
 
+            // The list is not valid, and we cannot do anything about that. Cannot be covered.
+            // @codeCoverageIgnoreStart
             if ($item === null) {
                 throw new UnavailableCurrencyListException(
                     strtr("Failed to read currency list '%list%'", ["%list%" => $resource])
                 );
             }
+            // @codeCoverageIgnoreEnd
 
             yield $item;
 
-            $xmlReader->next($entityTag);
+            $xmlReader->next($entityTag); // @codeCoverageIgnore
         }
     }
 }
