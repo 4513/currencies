@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MiBo\Currencies\ISO;
 
 use Generator;
@@ -7,7 +9,6 @@ use MiBo\Currencies\ISO\Contracts\LoopingTrait;
 use MiBo\Currencies\ISO\Exceptions\InvalidCacheDirException;
 use MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException;
 use MiBo\Currencies\ListLoader;
-use SimpleXMLElement;
 
 /**
  * Class ISOLocalListLoader
@@ -16,7 +17,9 @@ use SimpleXMLElement;
  *
  * @since 0.3
  *
- * @author Michal Boris <michal.boris@gmail.com>
+ * @author Michal Boris <michal.boris27@gmail.com>
+ *
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise.
  */
 class ISOLocalListLoader extends ListLoader
 {
@@ -27,6 +30,7 @@ class ISOLocalListLoader extends ListLoader
     public const FILE_NAME = "ISO_4217.xml";
 
     protected string $cacheDir;
+
     protected ?ISOListLoader $loader = null;
 
     /**
@@ -55,13 +59,13 @@ class ISOLocalListLoader extends ListLoader
         $handle = curl_init(ISOListLoader::SOURCE_WEB);
 
         if ($handle === false) {
-            return false;
+            return false; // @codeCoverageIgnore
         }
 
         $local = fopen($this->getCacheDir() . DIRECTORY_SEPARATOR . self::FILE_NAME, "wb");
 
         if ($local === false) {
-            return false;
+            return false; // @codeCoverageIgnore
         }
 
         curl_setopt($handle, CURLOPT_FILE, $local);
@@ -88,7 +92,7 @@ class ISOLocalListLoader extends ListLoader
     }
 
     /**
-     * @return Generator<SimpleXMLElement> object which properties are set same way as in
+     * @return \Generator<\SimpleXMLElement> object which properties are set same way as in
      *      the resource file.
      *
      * @inheritdoc
@@ -116,7 +120,7 @@ class ISOLocalListLoader extends ListLoader
                 }
             }
         } else {
-            /** @var SimpleXMLElement $item */
+            /** @var \SimpleXMLElement $item */
             foreach ($this->contractLoop(
                 $this->getResources()[0],
                 ISOListLoader::SHORT_CURRENCY_ENTITY

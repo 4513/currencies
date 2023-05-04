@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MiBo\Currencies;
 
-use MiBo\Currencies\ISO\ISOCurrency;
+use Stringable;
 
 /**
  * Interface CurrencyInterface
@@ -12,11 +14,13 @@ use MiBo\Currencies\ISO\ISOCurrency;
  *
  * @package MiBo\Currencies
  *
- * @see ISOCurrency
+ * @see \MiBo\Currencies\ISO\ISOCurrency
  *
  * @author Michal Boris <michal.boris27@gmail.com>
+ *
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise.
  */
-interface CurrencyInterface extends \Stringable
+interface CurrencyInterface extends Stringable
 {
     /**
      * @return non-empty-string Name of the currency.
@@ -40,7 +44,7 @@ interface CurrencyInterface extends \Stringable
     public function getMinorUnitRate(): ?int;
 
     /**
-     * @param CurrencyInterface $currency
+     * @param \MiBo\Currencies\CurrencyInterface $currency
      *
      * @return bool Whether currency matches the provided currency.
      */

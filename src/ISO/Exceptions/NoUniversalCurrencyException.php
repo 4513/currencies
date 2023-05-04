@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MiBo\Currencies\ISO\Exceptions;
 
 use RuntimeException;
@@ -11,7 +13,9 @@ use RuntimeException;
  *
  * @package MiBo\Currencies\ISO\Exceptions
  *
- * @author Michal Boris <michal.boris@gmail.com>
+ * @author Michal Boris <michal.boris27@gmail.com>
+ *
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise.
  */
 final class NoUniversalCurrencyException extends RuntimeException implements ISOCurrencyException
 {

@@ -16,7 +16,7 @@ use Psr\Log\NullLogger;
  *
  * @package MiBo\Currencies\Tests
  *
- * @author Michal Boris <michal.boris@gmail.com>
+ * @author Michal Boris <michal.boris27@gmail.com>
  *
  * @coversDefaultClass \MiBo\Currencies\CurrencyProvider
  */
@@ -25,6 +25,9 @@ class ProviderTest extends TestCase
     protected static ISOCurrencyProvider $provider;
     private static ISOCurrency $currency;
 
+    /**
+     * @return void
+     */
     public static function setUpBeforeClass(): void
     {
         self::$provider = new ISOCurrencyProvider(
@@ -43,9 +46,10 @@ class ProviderTest extends TestCase
     /**
      * @small
      *
-     * @covers ::findByName
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findByName
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
+     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findFirstBy
+     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::transformToCurrency
      *
      * @return void
      * @throws NoUniversalCurrencyException
@@ -62,9 +66,12 @@ class ProviderTest extends TestCase
     /**
      * @small
      *
-     * @covers ::findByAlphabeticalCode
+     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::__construct
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findByAlphabeticalCode
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
+     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findFirstBy
+     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::transformToCurrency
+     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::getLogger
      *
      * @return void
      * @throws InvalidCurrencyException
@@ -72,7 +79,9 @@ class ProviderTest extends TestCase
      */
     public function testFindByAlphabeticalCode(): void
     {
-        $foundCurrency = $this->getProvider()
+        $provider = new ISOCurrencyProvider($this->getProvider()->getLoader(), new NullLogger());
+
+        $foundCurrency = $provider
             ->findByAlphabeticalCode($this->getCurrency()->getAlphabeticalCode());
 
         $this->assertTrue($this->getCurrency()->is($foundCurrency));
@@ -81,9 +90,10 @@ class ProviderTest extends TestCase
     /**
      * @small
      *
-     * @covers ::findByNumericalCode
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findByNumericalCode
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
+     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findFirstBy
+     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::transformToCurrency
      *
      * @return void
      * @throws InvalidCurrencyException
@@ -100,9 +110,9 @@ class ProviderTest extends TestCase
     /**
      * @small
      *
-     * @covers ::findByCountry
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findByCountry
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
+     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::transformToCurrency
      *
      * @return void
      * @throws InvalidCurrencyException
@@ -142,6 +152,7 @@ class ProviderTest extends TestCase
      * @small
      *
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
+     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::transformToCurrency
      *
      * @return void
      * @throws InvalidCurrencyException
@@ -152,6 +163,27 @@ class ProviderTest extends TestCase
         $this->expectException(NoUniversalCurrencyException::class);
 
         $this->getProvider()->findByCountry("ANTARCTICA");
+    }
+
+    /**
+     * @small
+     *
+     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::getLoader
+     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::setLoader
+     *
+     * @return void
+     */
+    public function testLoader(): void
+    {
+        $this->assertInstanceOf(ISOListLoader::class, $this->getProvider()->getLoader());
+
+        $loader = $this->getProvider()->getLoader();
+
+        $this->getProvider()->setLoader(new ISOListLoader(ISOListLoader::SOURCE_LOCAL));
+        $this->assertSame([ISOListLoader::SOURCE_LOCAL], $this->getProvider()->getLoader()->getResources());
+        $this->getProvider()->setLoader(new ISOListLoader(ISOListLoader::SOURCE_WEB));
+        $this->assertSame([ISOListLoader::SOURCE_WEB], $this->getProvider()->getLoader()->getResources());
+        $this->getProvider()->setLoader($loader);
     }
 
     /**

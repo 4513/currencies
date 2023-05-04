@@ -9,7 +9,7 @@ use MiBo\Currencies\ISO\ISOListLoader;
  *
  * @package MiBo\Currencies\Tests
  *
- * @author Michal Boris <michal.boris@gmail.com>
+ * @author Michal Boris <michal.boris27@gmail.com>
  */
 class OnlineProviderTest extends ProviderTest
 {

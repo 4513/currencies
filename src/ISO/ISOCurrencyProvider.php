@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MiBo\Currencies\ISO;
 
 use MiBo\Currencies\CurrencyProvider;
@@ -18,16 +20,18 @@ use stdClass;
  * @link https://www.iso.org/iso-4217-currency-codes.html
  *
  * @author Michal Boris <michal.boris27@gmail.com>
+ *
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise.
  */
 class ISOCurrencyProvider extends CurrencyProvider
 {
     /**
      * @param non-empty-string $name
      *
-     * @return ISOCurrency
+     * @return \MiBo\Currencies\ISO\ISOCurrency
      *
-     * @throws InvalidCurrencyException If the currency is not valid.
-     * @throws NoUniversalCurrencyException If no-universal currency found.
+     * @throws \MiBo\Currencies\ISO\Exceptions\InvalidCurrencyException If the currency is not valid.
+     * @throws \MiBo\Currencies\ISO\Exceptions\NoUniversalCurrencyException If no-universal currency found.
      */
     final public function findByName(string $name): ISOCurrency
     {
@@ -39,10 +43,10 @@ class ISOCurrencyProvider extends CurrencyProvider
     /**
      * @param non-empty-string $code
      *
-     * @return ISOCurrency
+     * @return \MiBo\Currencies\ISO\ISOCurrency
      *
-     * @throws InvalidCurrencyException If the currency is not valid.
-     * @throws NoUniversalCurrencyException If no-universal currency found.
+     * @throws \MiBo\Currencies\ISO\Exceptions\InvalidCurrencyException If the currency is not valid.
+     * @throws \MiBo\Currencies\ISO\Exceptions\NoUniversalCurrencyException If no-universal currency found.
      */
     final public function findByAlphabeticalCode(string $code): ISOCurrency
     {
@@ -54,10 +58,10 @@ class ISOCurrencyProvider extends CurrencyProvider
     /**
      * @param numeric-string $code
      *
-     * @return ISOCurrency
+     * @return \MiBo\Currencies\ISO\ISOCurrency
      *
-     * @throws InvalidCurrencyException If the currency is not valid.
-     * @throws NoUniversalCurrencyException If no-universal currency found.
+     * @throws \MiBo\Currencies\ISO\Exceptions\InvalidCurrencyException If the currency is not valid.
+     * @throws \MiBo\Currencies\ISO\Exceptions\NoUniversalCurrencyException If no-universal currency found.
      */
     final public function findByNumericalCode(string $code): ISOCurrency
     {
@@ -69,10 +73,10 @@ class ISOCurrencyProvider extends CurrencyProvider
     /**
      * @param non-empty-string $country
      *
-     * @return ISOCurrency[]
+     * @return \MiBo\Currencies\ISO\ISOCurrency[]
      *
-     * @throws InvalidCurrencyException If the currency is not valid.
-     * @throws NoUniversalCurrencyException If no-universal currency found.
+     * @throws \MiBo\Currencies\ISO\Exceptions\InvalidCurrencyException If the currency is not valid.
+     * @throws \MiBo\Currencies\ISO\Exceptions\NoUniversalCurrencyException If no-universal currency found.
      */
     final public function findByCountry(string $country): array
     {
@@ -87,10 +91,10 @@ class ISOCurrencyProvider extends CurrencyProvider
      * @param int $maxMatches Count of maximum returned items.
      *           0 - returns all found items (default)
      *
-     * @return ISOCurrency[]
+     * @return \MiBo\Currencies\ISO\ISOCurrency[]
      *
-     * @throws InvalidCurrencyException If the currency is not valid.
-     * @throws NoUniversalCurrencyException If no-universal currency found.
+     * @throws \MiBo\Currencies\ISO\Exceptions\InvalidCurrencyException If the currency is not valid.
+     * @throws \MiBo\Currencies\ISO\Exceptions\NoUniversalCurrencyException If no-universal currency found.
      *
      * @internal This function might be overridden to implement cache.
      */
@@ -101,7 +105,7 @@ class ISOCurrencyProvider extends CurrencyProvider
         $matches = 0;
 
         // @phpcs:ignore
-        /** @var stdClass $item */
+        /** @var \stdClass $item */
         foreach ($this->getLoader()->loop() as $item) {
             $this->getLogger()->debug("Checking currency '{$item->{ISOListLoader::SHORT_CURRENCY_NAME}}'");
 
@@ -130,15 +134,15 @@ class ISOCurrencyProvider extends CurrencyProvider
     /**
      * @internal Returns first element of found matches
      *
-     * @see findBy()
+     * @see findBy
      *
      * @param \MiBo\Currencies\ISO\ISOListLoader::SHORT_* $key
      * @param non-empty-string|numeric-string $needle
      *
-     * @return ISOCurrency
+     * @return \MiBo\Currencies\ISO\ISOCurrency
      *
-     * @throws InvalidCurrencyException If the currency is not valid.
-     * @throws NoUniversalCurrencyException If no-universal currency found.
+     * @throws \MiBo\Currencies\ISO\Exceptions\InvalidCurrencyException If the currency is not valid.
+     * @throws \MiBo\Currencies\ISO\Exceptions\NoUniversalCurrencyException If no-universal currency found.
      */
     private function findFirstBy(string $key, string $needle): ISOCurrency
     {
@@ -146,19 +150,19 @@ class ISOCurrencyProvider extends CurrencyProvider
         $match = reset($match);
 
         if ($match === false) {
-            throw new InvalidCurrencyException("The ISO currency could not be found!");
+            throw new InvalidCurrencyException("The ISO currency could not be found!"); // @codeCoverageIgnore
         }
 
         return $match;
     }
 
     /**
-     * @param SimpleXMLElement|stdClass $element
+     * @param \SimpleXMLElement|\stdClass $element
      *
-     * @return ISOCurrency
+     * @return \MiBo\Currencies\ISO\ISOCurrency
      *
-     * @throws InvalidCurrencyException If the currency is not valid.
-     * @throws NoUniversalCurrencyException If no-universal currency found.
+     * @throws \MiBo\Currencies\ISO\Exceptions\InvalidCurrencyException If the currency is not valid.
+     * @throws \MiBo\Currencies\ISO\Exceptions\NoUniversalCurrencyException If no-universal currency found.
      */
     final protected function transformToCurrency(SimpleXMLElement|stdClass $element): ISOCurrency
     {

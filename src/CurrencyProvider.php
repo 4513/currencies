@@ -1,8 +1,8 @@
 <?php
 
-namespace MiBo\Currencies;
+declare(strict_types=1);
 
-use MiBo\Currencies\ISO\ISOCurrencyProvider;
+namespace MiBo\Currencies;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -12,16 +12,18 @@ use Psr\Log\LoggerInterface;
  *
  * @package MiBo\Currencies
  *
- * @see ISOCurrencyProvider
+ * @see \MiBo\Currencies\ISO\ISOCurrencyProvider
  *
  * @author Michal Boris <michal.boris27@gmail.com>
+ *
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise.
  */
 abstract class CurrencyProvider
 {
-    /** @var ListLoader  */
+    /** @var \MiBo\Currencies\ListLoader  */
     protected ListLoader $loader;
 
-    /** @var LoggerInterface  */
+    /** @var \Psr\Log\LoggerInterface  */
     private LoggerInterface $logger;
 
     /**
@@ -39,7 +41,7 @@ abstract class CurrencyProvider
      *
      * @param non-empty-string $name Currency name
      *
-     * @return CurrencyInterface
+     * @return \MiBo\Currencies\CurrencyInterface
      */
     abstract public function findByName(string $name): CurrencyInterface;
 
@@ -48,7 +50,7 @@ abstract class CurrencyProvider
      *
      * @param non-empty-string $code Alphabetical currency code
      *
-     * @return CurrencyInterface
+     * @return \MiBo\Currencies\CurrencyInterface
      */
     abstract public function findByAlphabeticalCode(string $code): CurrencyInterface;
 
@@ -57,7 +59,7 @@ abstract class CurrencyProvider
      *
      * @param non-empty-string $code
      *
-     * @return CurrencyInterface
+     * @return \MiBo\Currencies\CurrencyInterface
      */
     abstract public function findByNumericalCode(string $code): CurrencyInterface;
 
@@ -66,7 +68,7 @@ abstract class CurrencyProvider
      *
      * @param non-empty-string $country Name of country
      *
-     * @return CurrencyInterface[]
+     * @return \MiBo\Currencies\CurrencyInterface[]
      */
     abstract public function findByCountry(string $country): array;
 
@@ -83,7 +85,7 @@ abstract class CurrencyProvider
     }
 
     /**
-     * @return ListLoader
+     * @return \MiBo\Currencies\ListLoader
      */
     final public function getLoader(): ListLoader
     {
@@ -91,7 +93,7 @@ abstract class CurrencyProvider
     }
 
     /**
-     * @return LoggerInterface
+     * @return \Psr\Log\LoggerInterface
      */
     final protected function getLogger(): LoggerInterface
     {

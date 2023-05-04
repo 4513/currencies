@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MiBo\Currencies\ISO;
 
 use MiBo\Currencies\CurrencyInterface;
@@ -12,11 +14,13 @@ use Psr\Log\LoggerInterface;
  *
  * Manages ISO-4217.
  *
- * @package MiBo\Currencies
+ * @package MiBo\Currencies\ISO
  *
  * @link https://www.iso.org/iso-4217-currency-codes.html
  *
  * @author Michal Boris <michal.boris27@gmail.com>
+ *
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise.
  */
 final class ISOCurrencyManager
 {
@@ -37,7 +41,7 @@ final class ISOCurrencyManager
     }
 
     /**
-     * @param CurrencyInterface $currency
+     * @param \MiBo\Currencies\CurrencyInterface $currency
      *
      * @return bool Whether the currency's properties format follows the standard
      */
@@ -49,7 +53,7 @@ final class ISOCurrencyManager
             $this->getLogger()->debug("Currency '$currency' is valid for ISO.");
 
             return true;
-        } catch (InvalidCurrencyException $exception) {
+        } catch (InvalidCurrencyException) {
             $this->getLogger()->debug("Currency '$currency' is not valid for ISO.");
 
             return false;
@@ -57,7 +61,7 @@ final class ISOCurrencyManager
     }
 
     /**
-     * @param CurrencyInterface $currency
+     * @param \MiBo\Currencies\CurrencyInterface $currency
      *
      * @return bool Whether the currency is ISO
      */
@@ -81,7 +85,7 @@ final class ISOCurrencyManager
             $this->getLogger()->debug("Currency '$currency' is not ISO standard.");
 
             return false;
-        } catch (ISOCurrencyException $ISOCurrencyException) {
+        } catch (ISOCurrencyException) {
             $this->getLogger()->debug("Currency '$currency' is not ISO standard.");
 
             return false;
@@ -89,7 +93,7 @@ final class ISOCurrencyManager
     }
 
     /**
-     * @return ISOCurrencyProvider
+     * @return \MiBo\Currencies\ISO\ISOCurrencyProvider
      */
     public function getProvider(): ISOCurrencyProvider
     {
@@ -97,7 +101,7 @@ final class ISOCurrencyManager
     }
 
     /**
-     * @return LoggerInterface
+     * @return \Psr\Log\LoggerInterface
      */
     private function getLogger(): LoggerInterface
     {

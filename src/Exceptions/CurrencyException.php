@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MiBo\Currencies\Exceptions;
 
 /**
@@ -9,7 +11,7 @@ namespace MiBo\Currencies\Exceptions;
  *
  * @package MiBo\Currencies\Exceptions
  *
- * @author Michal Boris <michal.boris@gmail.com>
+ * @author Michal Boris <michal.boris27@gmail.com>
  */
 interface CurrencyException
 {
