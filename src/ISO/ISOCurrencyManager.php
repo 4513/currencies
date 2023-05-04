@@ -14,7 +14,7 @@ use Psr\Log\LoggerInterface;
  *
  * Manages ISO-4217.
  *
- * @package MiBo\Currencies
+ * @package MiBo\Currencies\ISO
  *
  * @link https://www.iso.org/iso-4217-currency-codes.html
  *

@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
 /**
- * Class ISOManager
+ * Class ISOManagerTest
  *
  * @package MiBo\Currencies\Tests
  *
@@ -19,7 +19,7 @@ use Psr\Log\NullLogger;
  *
  * @coversDefaultClass \MiBo\Currencies\ISO\ISOCurrencyManager
  */
-class ISOManager extends TestCase
+class ISOManagerTest extends TestCase
 {
     private static ISOCurrencyManager $manager;
 

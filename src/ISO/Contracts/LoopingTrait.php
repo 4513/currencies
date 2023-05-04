@@ -73,6 +73,7 @@ trait LoopingTrait
                     strtr("Failed to read currency list '%list%'", ["%list%" => $resource])
                 );
             }
+
             // @codeCoverageIgnoreEnd
 
             yield $item;
