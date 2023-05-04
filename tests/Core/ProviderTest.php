@@ -133,7 +133,7 @@ class ProviderTest extends TestCase
     }
 
     /**
-     * @small
+     * @medium
      *
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
      *
