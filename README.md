@@ -1,4 +1,7 @@
 # Currencies
+
+[![codecov](https://codecov.io/gh/4513/currencies/branch/main/graph/badge.svg?token=KGS6IAEWU8)](https://codecov.io/gh/4513/currencies)
+
 Based on ISO-4217
 
 ## Implementation
