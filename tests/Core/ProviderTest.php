@@ -44,7 +44,7 @@ class ProviderTest extends TestCase
     }
 
     /**
-     * @small
+     * @medium
      *
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findByName
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
@@ -64,7 +64,7 @@ class ProviderTest extends TestCase
     }
 
     /**
-     * @small
+     * @medium
      *
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::__construct
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findByAlphabeticalCode
@@ -88,7 +88,7 @@ class ProviderTest extends TestCase
     }
 
     /**
-     * @small
+     * @medium
      *
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findByNumericalCode
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
@@ -108,7 +108,7 @@ class ProviderTest extends TestCase
     }
 
     /**
-     * @small
+     * @medium
      *
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findByCountry
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
@@ -149,7 +149,7 @@ class ProviderTest extends TestCase
     }
 
     /**
-     * @small
+     * @medium
      *
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::transformToCurrency
@@ -166,7 +166,7 @@ class ProviderTest extends TestCase
     }
 
     /**
-     * @small
+     * @medium
      *
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::getLoader
      * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::setLoader

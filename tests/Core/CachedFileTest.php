@@ -35,7 +35,7 @@ class CachedFileTest extends TestCase
     }
 
     /**
-     * @small
+     * @medium
      *
      * @covers ::updateFile
      * @covers ::getCacheDir
@@ -163,7 +163,7 @@ class CachedFileTest extends TestCase
     }
 
     /**
-     * @small
+     * @medium
      *
      * @covers ::loop
      * @covers ::contractLoop
