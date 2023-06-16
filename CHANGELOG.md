@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2] - 2023-06-16
+
+### Changed
+- ISO Local List updated to 2023-01-01
+- ISO Local List - Croatia changed from HRK to EUR
+- ISO Local List - Sierra Leone added
+- ISO Local List - Turkey renamed to TÜRKİYE
+
 ## [0.2.0] - 2022-05-11
 
 ### Added

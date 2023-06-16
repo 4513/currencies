@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ISO_4217 Pblshd="October 1, 2021">
+<ISO_4217 Pblshd="2023-01-01">
 	<CcyTbl>
 		<CcyNtry>
 			<CtryNm>AFGHANISTAN</CtryNm>
@@ -413,9 +413,9 @@
 		</CcyNtry>
 		<CcyNtry>
 			<CtryNm>CROATIA</CtryNm>
-			<CcyNm>Kuna</CcyNm>
-			<Ccy>HRK</Ccy>
-			<CcyNbr>191</CcyNbr>
+			<CcyNm>Euro</CcyNm>
+			<Ccy>EUR</Ccy>
+			<CcyNbr>978</CcyNbr>
 			<CcyMnrUnts>2</CcyMnrUnts>
 		</CcyNtry>
 		<CcyNtry>
@@ -790,7 +790,7 @@
 			<CcyMnrUnts>2</CcyMnrUnts>
 		</CcyNtry>
 		<CcyNtry>
-			<CtryNm>INTERNATIONAL MONETARY FUND (IMF) </CtryNm>
+			<CtryNm>INTERNATIONAL MONETARY FUND (IMF) </CtryNm>
 			<CcyNm>SDR (Special Drawing Right)</CcyNm>
 			<Ccy>XDR</Ccy>
 			<CcyNbr>960</CcyNbr>
@@ -1494,6 +1494,13 @@
 			<CcyMnrUnts>2</CcyMnrUnts>
 		</CcyNtry>
 		<CcyNtry>
+			<CtryNm>SIERRA LEONE</CtryNm>
+			<CcyNm>Leone</CcyNm>
+			<Ccy>SLE</Ccy>
+			<CcyNbr>925</CcyNbr>
+			<CcyMnrUnts>2</CcyMnrUnts>
+		</CcyNtry>
+		<CcyNtry>
 			<CtryNm>SINGAPORE</CtryNm>
 			<CcyNm>Singapore Dollar</CcyNm>
 			<Ccy>SGD</Ccy>
@@ -1701,7 +1708,7 @@
 			<CcyMnrUnts>3</CcyMnrUnts>
 		</CcyNtry>
 		<CcyNtry>
-			<CtryNm>TURKEY</CtryNm>
+			<CtryNm>TÜRKİYE</CtryNm>
 			<CcyNm>Turkish Lira</CcyNm>
 			<Ccy>TRY</Ccy>
 			<CcyNbr>949</CcyNbr>
