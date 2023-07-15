@@ -6,3 +6,4 @@ composer.lock
 phpcs.xml
 phpstan.neon
 phpunit.xml
+tests/Core/tmp.php
