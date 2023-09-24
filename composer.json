@@ -13,6 +13,7 @@
             "name": "Michal Boris"
         }
     ],
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "MiBo\\Currencies\\": "src/"
