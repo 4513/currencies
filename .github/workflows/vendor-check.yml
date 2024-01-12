@@ -1,11 +1,11 @@
-name: Minimum Stability
+name: Vendor Check
 
 on:
   push:
     branches:
-      - "**"
-  pull_request:
-    branches: [ "main" ]
+      - "main"
+  schedule:
+    - cron: "0 1 * * *"
 
 permissions:
   contents: read
@@ -21,10 +21,10 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.3'
 
       - name: Composer Install
-        run: composer update --prefer-dist --no-progress --prefer-lowest
+        run: composer install
 
-      - name: PHPUnit
-        run: ./vendor/bin/phpunit --testsuite Full
+      - name: Check new major versions of vendor libs
+        run: composer outdated

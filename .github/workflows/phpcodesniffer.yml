@@ -1,11 +1,9 @@
-name: Minimum Stability
+name: PHP_CodeSniffer
 
 on:
   push:
     branches:
       - "**"
-  pull_request:
-    branches: [ "main" ]
 
 permissions:
   contents: read
@@ -21,10 +19,10 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.3'
 
       - name: Composer Install
-        run: composer update --prefer-dist --no-progress --prefer-lowest
+        run: composer install --prefer-dist --no-progress
 
-      - name: PHPUnit
-        run: ./vendor/bin/phpunit --testsuite Full
+      - name: PHP_CodeSniffer
+        run: ./vendor/bin/phpcs
