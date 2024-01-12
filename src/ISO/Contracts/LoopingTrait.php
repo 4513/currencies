@@ -45,11 +45,13 @@ trait LoopingTrait
         $domDoc = new DOMDocument();
 
         // @phpcs:disable
+        // @phpstan-ignore-next-line XMLReader::$name problem? Seems like a bug in PHPStan.
         while ($xmlReader->read() && $xmlReader->name !== $entityTag) {
             // Reads the file until it finds the first currency
         }
         // @phpcs:enable
 
+        // @phpstan-ignore-next-line XMLReader::$name problem? Seems like a bug in PHPStan.
         while ($xmlReader->name === $entityTag) {
             $DOMNode = $xmlReader->expand();
 
