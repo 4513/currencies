@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2024-01-29
+
+### Changed
+- ISO Local List updated to 2024-01-01
+- ISO Local List - Sierra Leone deleted SLL from list
+
 ## [1.1.0] - 2023-07-15
 
 ### Added

@@ -1515,13 +1515,6 @@ class ISOArrayListLoader extends ListLoader
         [
             'CtryNm'     => 'SIERRA LEONE',
             'CcyNm'      => 'Leone',
-            'Ccy'        => 'SLL',
-            'CcyNbr'     => '694',
-            'CcyMnrUnts' => '2',
-        ],
-        [
-            'CtryNm'     => 'SIERRA LEONE',
-            'CcyNm'      => 'Leone',
             'Ccy'        => 'SLE',
             'CcyNbr'     => '925',
             'CcyMnrUnts' => '2',
