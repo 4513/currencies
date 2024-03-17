@@ -1,5 +1,6 @@
 vendor/
 storage/
+.phpunit.cache/
 
 .phpunit.result.cache
 composer.lock

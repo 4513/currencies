@@ -1,20 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<phpunit colors="true"
-         convertDeprecationsToExceptions="true"
-         convertNoticesToExceptions="true"
-         forceCoversAnnotation="true"
-         beStrictAboutTodoAnnotatedTests="true"
-         enforceTimeLimit="true">
-
-    <testsuites>
-        <testsuite name="Core Tests">
-            <directory>./tests/Core/</directory>
-        </testsuite>
-    </testsuites>
-    <coverage processUncoveredFiles="true">
-        <include>
-            <directory suffix=".php">./src</directory>
-        </include>
-    </coverage>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" colors="true" enforceTimeLimit="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" cacheDirectory=".phpunit.cache" requireCoverageMetadata="true">
+  <testsuites>
+    <testsuite name="Core Tests">
+      <directory>./tests/Core/</directory>
+    </testsuite>
+  </testsuites>
+  <source>
+    <include>
+      <directory suffix=".php">./src</directory>
+    </include>
+  </source>
 </phpunit>
