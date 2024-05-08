@@ -5,6 +5,8 @@ namespace MiBo\Currencies\Tests;
 use MiBo\Currencies\ISO\Exceptions\InvalidCacheDirException;
 use MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException;
 use MiBo\Currencies\ISO\ISOLocalListLoader;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -13,9 +15,9 @@ use PHPUnit\Framework\TestCase;
  * @package MiBo\Currencies\Tests
  *
  * @author Michal Boris <michal.boris27@gmail.com>
- *
- * @coversDefaultClass \MiBo\Currencies\ISO\ISOLocalListLoader
  */
+#[CoversClass(ISOLocalListLoader::class)]
+#[Small]
 class CachedFileTest extends TestCase
 {
     protected const DIR_TMP = __DIR__ . "/../../storage/tmp/";
@@ -34,146 +36,83 @@ class CachedFileTest extends TestCase
         self::$loader = new ISOLocalListLoader(static::DIR_TMP);
     }
 
-    /**
-     * @medium
-     *
-     * @covers ::updateFile
-     * @covers ::getCacheDir
-     *
-     * @return void
-     */
     public function testDownload(): void
     {
-        $this->assertTrue($this->getLoader()->updateFile());
+        self::assertTrue($this->getLoader()->updateFile());
 
-        $this->assertFileExists(static::DIR_TMP . ISOLocalListLoader::FILE_NAME);
+        self::assertFileExists(static::DIR_TMP . ISOLocalListLoader::FILE_NAME);
     }
 
-    /**
-     * @small
-     *
-     * @covers ::getCacheDir
-     * @covers ::setCacheDir
-     *
-     * @return void
-     */
     public function testCacheDir(): void
     {
-        $this->assertSame(self::DIR_TMP, $this->getLoader()->getCacheDir());
+        self::assertSame(self::DIR_TMP, $this->getLoader()->getCacheDir());
         $this->getLoader()->setCacheDir(__DIR__ . "/../../storage/");
-        $this->assertSame(__DIR__ . "/../../storage/", $this->getLoader()->getCacheDir());
+        self::assertSame(__DIR__ . "/../../storage/", $this->getLoader()->getCacheDir());
         $this->getLoader()->setCacheDir(self::DIR_TMP);
     }
 
-    /**
-     * @small
-     *
-     * @covers ::setResources
-     *
-     * @return void
-     */
     public function testSetResources(): void
     {
-        $this->expectException(UnavailableCurrencyListException::class);
-        $this->expectExceptionMessage("Cannot use custom list of ISO currencies!");
+        self::expectException(UnavailableCurrencyListException::class);
+        self::expectExceptionMessage("Cannot use custom list of ISO currencies!");
 
         $this->getLoader()->setResources("");
     }
 
-    /**
-     * @small
-     *
-     * @covers ::addResource
-     *
-     * @return void
-     */
     public function testAddResource(): void
     {
-        $this->expectException(UnavailableCurrencyListException::class);
-        $this->expectExceptionMessage("Cannot use custom list of ISO currencies!");
+        self::expectException(UnavailableCurrencyListException::class);
+        self::expectExceptionMessage("Cannot use custom list of ISO currencies!");
 
         $this->getLoader()->addResource("");
     }
 
-    /**
-     * @small
-     *
-     * @covers ::loop
-     * @covers ::contractLoop
-     *
-     * @return void
-     * @throws \MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException
-     */
     public function testLoop(): void
     {
         foreach ($this->getLoader()->loop() as $object) {
-            $this->assertIsObject($object);
+            self::assertIsObject($object);
 
-            $this->assertNotNull($object->CtryNm);
+            self::assertNotNull($object->CtryNm);
 
-            $this->assertNotNull($object->CcyNm);
+            self::assertNotNull($object->CcyNm);
 
             return;
         }
 
-        $this->fail("Failed to loop the list.");
+        self::fail("Failed to loop the list.");
     }
 
-    /**
-     * @small
-     *
-     * @covers ::updateFile
-     * @covers ::isFileCached
-     * @covers ::__construct
-     *
-     * @return void
-     */
     public function testCache(): void
     {
         static::tearDownAfterClass();
 
         $loader = new ISOLocalListLoader(static::DIR_TMP);
 
-        $this->assertEmpty($loader->getResources());
+        self::assertEmpty($loader->getResources());
 
         $loader->updateFile();
 
-        $this->assertNotEmpty($loader->getResources());
+        self::assertNotEmpty($loader->getResources());
 
         $loader = new ISOLocalListLoader(static::DIR_TMP);
 
-        $this->assertNotEmpty($loader->getResources());
+        self::assertNotEmpty($loader->getResources());
     }
 
-    /**
-     * @small
-     *
-     * @covers ::__construct
-     *
-     * @return void
-     */
     public function testInvalidDirectory(): void
     {
         $cacheDir = static::DIR_TMP . "test";
 
-        $this->expectException(InvalidCacheDirException::class);
-        $this->expectExceptionMessage("Directory '$cacheDir' does not exist!");
+        self::expectException(InvalidCacheDirException::class);
+        self::expectExceptionMessage("Directory '$cacheDir' does not exist!");
 
         new ISOLocalListLoader($cacheDir);
     }
 
-    /**
-     * @medium
-     *
-     * @covers ::loop
-     * @covers ::contractLoop
-     *
-     * @doesNotPerformAssertions
-     *
-     * @return void
-     */
     public function testLoopingCachedFile(): void
     {
+        self::expectNotToPerformAssertions();
+
         $this->getLoader()->updateFile();
 
         $this->getLoader()->loop();

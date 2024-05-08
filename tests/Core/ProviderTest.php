@@ -3,11 +3,13 @@
 namespace MiBo\Currencies\Tests;
 
 use MiBo\Currencies\CurrencyInterface;
-use MiBo\Currencies\ISO\Exceptions\InvalidCurrencyException;
+use MiBo\Currencies\CurrencyProvider;
 use MiBo\Currencies\ISO\Exceptions\NoUniversalCurrencyException;
 use MiBo\Currencies\ISO\ISOCurrency;
 use MiBo\Currencies\ISO\ISOCurrencyProvider;
 use MiBo\Currencies\ISO\ISOListLoader;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Medium;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
@@ -17,9 +19,10 @@ use Psr\Log\NullLogger;
  * @package MiBo\Currencies\Tests
  *
  * @author Michal Boris <michal.boris27@gmail.com>
- *
- * @coversDefaultClass \MiBo\Currencies\CurrencyProvider
  */
+#[CoversClass(CurrencyProvider::class)]
+#[CoversClass(ISOCurrencyProvider::class)]
+#[Medium]
 class ProviderTest extends TestCase
 {
     protected static ISOCurrencyProvider $provider;
@@ -43,40 +46,14 @@ class ProviderTest extends TestCase
         );
     }
 
-    /**
-     * @medium
-     *
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findByName
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findFirstBy
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::transformToCurrency
-     *
-     * @return void
-     * @throws NoUniversalCurrencyException
-     * @throws InvalidCurrencyException
-     */
     public function testFindByName(): void
     {
         $foundCurrency = $this->getProvider()
             ->findByName($this->getCurrency()->getName());
 
-        $this->assertTrue($this->getCurrency()->is($foundCurrency));
+        self::assertTrue($this->getCurrency()->is($foundCurrency));
     }
 
-    /**
-     * @medium
-     *
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::__construct
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findByAlphabeticalCode
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findFirstBy
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::transformToCurrency
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::getLogger
-     *
-     * @return void
-     * @throws InvalidCurrencyException
-     * @throws NoUniversalCurrencyException
-     */
     public function testFindByAlphabeticalCode(): void
     {
         $provider = new ISOCurrencyProvider($this->getProvider()->getLoader(), new NullLogger());
@@ -84,63 +61,31 @@ class ProviderTest extends TestCase
         $foundCurrency = $provider
             ->findByAlphabeticalCode($this->getCurrency()->getAlphabeticalCode());
 
-        $this->assertTrue($this->getCurrency()->is($foundCurrency));
+        self::assertTrue($this->getCurrency()->is($foundCurrency));
     }
 
-    /**
-     * @medium
-     *
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findByNumericalCode
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findFirstBy
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::transformToCurrency
-     *
-     * @return void
-     * @throws InvalidCurrencyException
-     * @throws NoUniversalCurrencyException
-     */
     public function testFindByNumericalCode(): void
     {
         $foundCurrency = $this->getProvider()
             ->findByNumericalCode($this->getCurrency()->getNumericalCode());
 
-        $this->assertTrue($this->getCurrency()->is($foundCurrency));
+        self::assertTrue($this->getCurrency()->is($foundCurrency));
     }
 
-    /**
-     * @medium
-     *
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findByCountry
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::transformToCurrency
-     *
-     * @return void
-     * @throws InvalidCurrencyException
-     * @throws NoUniversalCurrencyException
-     */
     public function testFindByCountry(): void
     {
         $foundCurrencies = $this->getProvider()
             ->findByCountry("SLOVAKIA");
 
-        $this->assertNotEmpty($foundCurrencies);
+        self::assertNotEmpty($foundCurrencies);
 
-        $this->assertSame(1, count($foundCurrencies));
+        self::assertSame(1, count($foundCurrencies));
 
         $foundCurrency = $foundCurrencies[0];
 
-        $this->assertTrue($this->getCurrency()->is($foundCurrency));
+        self::assertTrue($this->getCurrency()->is($foundCurrency));
     }
 
-    /**
-     * @medium
-     *
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
-     *
-     * @return void
-     * @throws InvalidCurrencyException
-     * @throws NoUniversalCurrencyException
-     */
     public function testMissingCurrency(): void
     {
         $this->expectExceptionMessage("The ISO currency could not be found!");
@@ -148,16 +93,6 @@ class ProviderTest extends TestCase
         $this->getProvider()->findByNumericalCode("000");
     }
 
-    /**
-     * @medium
-     *
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::findBy
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::transformToCurrency
-     *
-     * @return void
-     * @throws InvalidCurrencyException
-     * @throws NoUniversalCurrencyException
-     */
     public function testNoUniversalCurrency(): void
     {
         $this->expectException(NoUniversalCurrencyException::class);
@@ -165,24 +100,16 @@ class ProviderTest extends TestCase
         $this->getProvider()->findByCountry("ANTARCTICA");
     }
 
-    /**
-     * @medium
-     *
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::getLoader
-     * @covers \MiBo\Currencies\ISO\ISOCurrencyProvider::setLoader
-     *
-     * @return void
-     */
     public function testLoader(): void
     {
-        $this->assertInstanceOf(ISOListLoader::class, $this->getProvider()->getLoader());
+        self::assertInstanceOf(ISOListLoader::class, $this->getProvider()->getLoader());
 
         $loader = $this->getProvider()->getLoader();
 
         $this->getProvider()->setLoader(new ISOListLoader(ISOListLoader::SOURCE_LOCAL));
-        $this->assertSame([ISOListLoader::SOURCE_LOCAL], $this->getProvider()->getLoader()->getResources());
+        self::assertSame([ISOListLoader::SOURCE_LOCAL], $this->getProvider()->getLoader()->getResources());
         $this->getProvider()->setLoader(new ISOListLoader(ISOListLoader::SOURCE_WEB));
-        $this->assertSame([ISOListLoader::SOURCE_WEB], $this->getProvider()->getLoader()->getResources());
+        self::assertSame([ISOListLoader::SOURCE_WEB], $this->getProvider()->getLoader()->getResources());
         $this->getProvider()->setLoader($loader);
     }
 

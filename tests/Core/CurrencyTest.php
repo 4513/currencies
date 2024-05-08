@@ -5,6 +5,8 @@ namespace MiBo\Currencies\Tests;
 use MiBo\Currencies\CurrencyInterface;
 use MiBo\Currencies\ISO\Exceptions\InvalidCurrencyException;
 use MiBo\Currencies\ISO\ISOCurrency;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -13,23 +15,11 @@ use PHPUnit\Framework\TestCase;
  * @package MiBo\Currencies\Tests
  *
  * @author Michal Boris <michal.boris27@gmail.com>
- *
- * @coversDefaultClass \MiBo\Currencies\ISO\ISOCurrency
  */
+#[CoversClass(ISOCurrency::class)]
+#[Small]
 class CurrencyTest extends TestCase
 {
-    /**
-     * @small
-     *
-     * @covers ::validateISO
-     * @covers ::__toString
-     * @covers ::getName
-     * @covers ::getAlphabeticalCode
-     * @covers ::getNumericalCode
-     * @covers ::getMinorUnitRate
-     *
-     * @return void
-     */
     public function testCreateValidCurrency(): void
     {
         $currency = new ISOCurrency(
@@ -39,21 +29,14 @@ class CurrencyTest extends TestCase
             null
         );
 
-        $this->assertSame("ABC", (string) $currency);
+        self::assertSame("ABC", (string) $currency);
 
-        $this->assertSame("Test", $currency->getName());
-        $this->assertSame("ABC", $currency->getAlphabeticalCode());
-        $this->assertSame("012", $currency->getNumericalCode());
-        $this->assertSame(null, $currency->getMinorUnitRate());
+        self::assertSame("Test", $currency->getName());
+        self::assertSame("ABC", $currency->getAlphabeticalCode());
+        self::assertSame("012", $currency->getNumericalCode());
+        self::assertSame(null, $currency->getMinorUnitRate());
     }
 
-    /**
-     * @small
-     *
-     * @covers ::validateISO
-     *
-     * @return void
-     */
     public function testCreateInvalidCurrency(): void
     {
         $this->expectException(InvalidCurrencyException::class);
@@ -69,33 +52,18 @@ class CurrencyTest extends TestCase
         // @phpcs:enable
     }
 
-    /**
-     * @small
-     *
-     * @covers ::is
-     *
-     * @return void
-     */
     public function testIsSame(): void
     {
         $first = new ISOCurrency("TEST", "ABC", "012", null);
         $second = new ISOCurrency("TEST", "ABC", "012", null);
         $third = new ISOCurrency("TEST", "ABC", "123", null);
 
-        $this->assertTrue($first->is($first));
-        $this->assertTrue($first->is($second));
+        self::assertTrue($first->is($first));
+        self::assertTrue($first->is($second));
 
-        $this->assertFalse($first->is($third));
+        self::assertFalse($first->is($third));
     }
 
-    /**
-     * @small
-     *
-     * @covers \MiBo\Currencies\ISO\ISOCurrency::__construct
-     * @covers \MiBo\Currencies\ISO\ISOCurrency::validateISO
-     *
-     * @return void
-     */
     public function testISOValidation(): void
     {
         $currency          = new class implements CurrencyInterface {
@@ -114,7 +82,7 @@ class CurrencyTest extends TestCase
 
             $this->fail("Failed to throw the mismatching exception because the currency is not an ISO currency!");
         } catch (InvalidCurrencyException $exception) {
-            $this->assertSame(
+            self::assertSame(
                 "Provided currency is not type of '$expectedClassName'. '$currencyClassName' provided.",
                 $exception->getMessage()
             );

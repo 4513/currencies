@@ -6,6 +6,8 @@ namespace MiBo\Currencies\Tests;
 
 use MiBo\Currencies\ISO\ISOArrayListLoader;
 use MiBo\Currencies\ISO\ISOListLoader;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -18,44 +20,31 @@ use PHPUnit\Framework\TestCase;
  * @since 1.2
  *
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise.
- *
- * @coversDefaultClass \MiBo\Currencies\ISO\ISOArrayListLoader
  */
+#[CoversClass(ISOArrayListLoader::class)]
+#[Small]
 class ArrayListLoaderTest extends TestCase
 {
-    /**
-     * @small
-     *
-     * @covers ::loop
-     *
-     * @return void
-     */
     public function test(): void
     {
         $loader = new ISOArrayListLoader();
 
         foreach ($loader->loop() as $currency) {
-            $this->assertIsObject($currency);
-            $this->assertSame("AFGHANISTAN", $currency->CtryNm);
-            $this->assertSame("Afghani", $currency->CcyNm);
-            $this->assertSame("AFN", $currency->Ccy);
-            $this->assertSame("971", $currency->CcyNbr);
-            $this->assertSame("2", $currency->CcyMnrUnts);
+            self::assertIsObject($currency);
+            self::assertSame("AFGHANISTAN", $currency->CtryNm);
+            self::assertSame("Afghani", $currency->CcyNm);
+            self::assertSame("AFN", $currency->Ccy);
+            self::assertSame("971", $currency->CcyNbr);
+            self::assertSame("2", $currency->CcyMnrUnts);
 
             break;
         }
     }
 
-    /**
-     * @large
-     *
-     * @coversNothing
-     * @doesNotPerformAssertions
-     *
-     * @return void
-     */
     public function create(): void
     {
+        self::expectNotToPerformAssertions();
+
         return;
 
         if (file_exists(__DIR__ . "/tmp.php")) {

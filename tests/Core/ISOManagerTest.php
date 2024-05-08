@@ -7,6 +7,8 @@ use MiBo\Currencies\ISO\ISOCurrency;
 use MiBo\Currencies\ISO\ISOCurrencyProvider;
 use MiBo\Currencies\ISO\ISOListLoader;
 use MiBo\Currencies\ISO\ISOCurrencyManager;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
@@ -16,9 +18,9 @@ use Psr\Log\NullLogger;
  * @package MiBo\Currencies\Tests
  *
  * @author Michal Boris <michal.boris27@gmail.com>
- *
- * @coversDefaultClass \MiBo\Currencies\ISO\ISOCurrencyManager
  */
+#[CoversClass(ISOCurrencyManager::class)]
+#[Small]
 class ISOManagerTest extends TestCase
 {
     private static ISOCurrencyManager $manager;
@@ -54,14 +56,6 @@ class ISOManagerTest extends TestCase
         );
     }
 
-    /**
-     * @small
-     *
-     * @covers ::__construct
-     * @covers ::getProvider
-     *
-     * @return void
-     */
     public function testManager(): void
     {
         $manager = new ISOCurrencyManager(
@@ -69,31 +63,22 @@ class ISOManagerTest extends TestCase
             new NullLogger()
         );
 
-        $this->assertSame([ISOListLoader::SOURCE_LOCAL], $manager->getProvider()->getLoader()->getResources());
+        self::assertSame([ISOListLoader::SOURCE_LOCAL], $manager->getProvider()->getLoader()->getResources());
     }
 
-    /**
-     * @small
-     *
-     * @covers ::isCurrencyValid
-     * @covers ::isCurrencyISO
-     * @covers ::getLogger
-     *
-     * @return void
-     */
     public function testValidCurrencies(): void
     {
-        $this->assertTrue($this->getManager()->isCurrencyValid($this->getValidCurrency()));
-        $this->assertTrue($this->getManager()->isCurrencyISO($this->getValidCurrency()));
+        self::assertTrue($this->getManager()->isCurrencyValid($this->getValidCurrency()));
+        self::assertTrue($this->getManager()->isCurrencyISO($this->getValidCurrency()));
 
-        $this->assertTrue($this->getManager()->isCurrencyValid($this->getInvalidCurrency()));
-        $this->assertFalse($this->getManager()->isCurrencyISO($this->getInvalidCurrency()));
+        self::assertTrue($this->getManager()->isCurrencyValid($this->getInvalidCurrency()));
+        self::assertFalse($this->getManager()->isCurrencyISO($this->getInvalidCurrency()));
 
-        $this->assertFalse($this->getManager()->isCurrencyISO(
+        self::assertFalse($this->getManager()->isCurrencyISO(
             new ISOCurrency("TEST", "TTT", "012", 0)
         ));
 
-        $this->assertFalse($this->getManager()->isCurrencyISO(
+        self::assertFalse($this->getManager()->isCurrencyISO(
             new class implements CurrencyInterface {
                 public function getName(): string { return ""; }
                 public function getCode(): string { return ""; }

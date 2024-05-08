@@ -3,6 +3,7 @@
 namespace MiBo\Currencies\Tests;
 
 use MiBo\Currencies\ISO\ISOListLoader;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class OnlineProviderTest
@@ -11,6 +12,7 @@ use MiBo\Currencies\ISO\ISOListLoader;
  *
  * @author Michal Boris <michal.boris27@gmail.com>
  */
+#[CoversClass(ISOListLoader::class)]
 class OnlineProviderTest extends ProviderTest
 {
     public static function setUpBeforeClass(): void
