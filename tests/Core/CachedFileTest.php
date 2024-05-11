@@ -6,7 +6,7 @@ use MiBo\Currencies\ISO\Exceptions\InvalidCacheDirException;
 use MiBo\Currencies\ISO\Exceptions\UnavailableCurrencyListException;
 use MiBo\Currencies\ISO\ISOLocalListLoader;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Small;
+use PHPUnit\Framework\Attributes\Medium;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  * @author Michal Boris <michal.boris27@gmail.com>
  */
 #[CoversClass(ISOLocalListLoader::class)]
-#[Small]
+#[Medium]
 class CachedFileTest extends TestCase
 {
     protected const DIR_TMP = __DIR__ . "/../../storage/tmp/";

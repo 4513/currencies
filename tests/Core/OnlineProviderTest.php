@@ -4,6 +4,7 @@ namespace MiBo\Currencies\Tests;
 
 use MiBo\Currencies\ISO\ISOListLoader;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Medium;
 
 /**
  * Class OnlineProviderTest
@@ -13,6 +14,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
  * @author Michal Boris <michal.boris27@gmail.com>
  */
 #[CoversClass(ISOListLoader::class)]
+#[Medium]
 class OnlineProviderTest extends ProviderTest
 {
     public static function setUpBeforeClass(): void
