@@ -1906,9 +1906,9 @@ class ISOArrayListLoader extends ListLoader
         ],
         [
             'CtryNm'     => 'ZIMBABWE',
-            'CcyNm'      => 'Zimbabwe Dollar',
-            'Ccy'        => 'ZWL',
-            'CcyNbr'     => '932',
+            'CcyNm'      => 'Zimbabwe Gold',
+            'Ccy'        => 'ZWG',
+            'CcyNbr'     => '924',
             'CcyMnrUnts' => '2',
         ],
         [
